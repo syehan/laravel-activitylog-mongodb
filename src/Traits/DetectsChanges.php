@@ -2,9 +2,9 @@
 
 namespace Spatie\Activitylog\Traits;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 trait DetectsChanges
 {

@@ -2,7 +2,7 @@
 
 namespace Spatie\Activitylog\Traits;
 
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Jenssegers\Mongodb\Relations\MorphMany;
 use Spatie\Activitylog\ActivitylogServiceProvider;
 
 trait CausesActivity

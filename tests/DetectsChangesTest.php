@@ -3,8 +3,8 @@
 namespace Spatie\Activitylog\Test;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
+use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Test\Models\Article;
 use Spatie\Activitylog\Test\Models\User;
@@ -643,12 +643,7 @@ class DetectsChangesTest extends TestCase
         $expectedChanges = [
             'attributes' => [
                 'name' => 'my name',
-                'text' => null,
-                'deleted_at' => null,
-                'id' => $article->id,
-                'user_id' => null,
-                'json' => null,
-                'price' => null,
+                '_id' => $article->id,
                 'created_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
                 'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
             ],
@@ -675,18 +670,15 @@ class DetectsChangesTest extends TestCase
         $article = $articleClass::create([
             'name' => 'article name',
             'text' => 'article text',
-            'user_id' => $user->id,
+            'user_id' => $user->_id,
         ]);
 
         $expectedChanges = [
             'attributes' => [
-                'id' => $article->id,
+                '_id' => $article->_id,
                 'name' => 'article name',
                 'text' => 'article text',
-                'deleted_at' => null,
                 'user_id' => $user->id,
-                'json' => null,
-                'price' => null,
                 'created_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
                 'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
                 'user.name' => 'user name',
@@ -797,12 +789,7 @@ class DetectsChangesTest extends TestCase
 
         $expectedChanges = [
             'attributes' => [
-                'text' => null,
-                'deleted_at' => null,
-                'id' => $article->id,
-                'user_id' => null,
-                'json' => null,
-                'price' => null,
+                '_id' => $article->id,
                 'created_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
             ],
         ];
@@ -829,8 +816,7 @@ class DetectsChangesTest extends TestCase
         $expectedChanges = [
             'attributes' => [
                 'name' => 'my name',
-                'user_id' => null,
-                'price' => null,
+                '_id' => $article->_id,
             ],
         ];
 
@@ -941,12 +927,11 @@ class DetectsChangesTest extends TestCase
 
         $expectedChanges = [
             'attributes' => [
-                'id' => $user->id,
+                '_id' => $user->id,
                 'name' => 'MY NAME',
                 'text' => 'my text',
                 'created_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
                 'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
-                'deleted_at' => null,
             ],
         ];
 
@@ -957,20 +942,18 @@ class DetectsChangesTest extends TestCase
 
         $expectedChanges = [
             'old' => [
-                'id' => $user->id,
+                '_id' => $user->id,
                 'name' => 'MY NAME',
                 'text' => 'my text',
                 'created_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
                 'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
-                'deleted_at' => null,
             ],
             'attributes' => [
-                'id' => $user->id,
+                '_id' => $user->id,
                 'name' => 'MY NAME 2',
                 'text' => 'my text',
                 'created_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
                 'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
-                'deleted_at' => null,
             ],
         ];
 
@@ -1000,12 +983,11 @@ class DetectsChangesTest extends TestCase
 
         $expectedChanges = [
             'attributes' => [
-                'id' => $user->id,
+                '_id' => $user->id,
                 'name' => 'MY NAME',
                 'text' => 'my text',
                 'created_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
                 'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
-                'deleted_at' => null,
             ],
         ];
 
@@ -1016,20 +998,18 @@ class DetectsChangesTest extends TestCase
 
         $expectedChanges = [
             'old' => [
-                'id' => $user->id,
+                '_id' => $user->id,
                 'name' => 'MY NAME',
                 'text' => 'my text',
                 'created_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
                 'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
-                'deleted_at' => null,
             ],
             'attributes' => [
-                'id' => $user->id,
+                '_id' => $user->id,
                 'name' => 'MY NAME 2',
                 'text' => 'my text',
                 'created_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
                 'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
-                'deleted_at' => null,
             ],
         ];
 
@@ -1170,12 +1150,11 @@ class DetectsChangesTest extends TestCase
 
         $expectedChanges = [
             'attributes' => [
-                'id' => $user->getKey(),
+                '_id' => $user->getKey(),
                 'name' => 'my name',
                 'text' => 'my text',
                 'created_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
                 'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
-                'deleted_at' => null,
             ],
         ];
 
@@ -1203,12 +1182,11 @@ class DetectsChangesTest extends TestCase
 
         $expectedChanges = [
             'attributes' => [
-                'id' => $user->getKey(),
+                '_id' => $user->getKey(),
                 'name' => 'my name',
                 'text' => 'my text',
                 'created_at' => '01.01.2017',
-                'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z',
-                'deleted_at' => null,
+                'updated_at' => $this->isLaravel6OrLower() ? '2017-01-01 12:00:00' : '2017-01-01T12:00:00.000000Z'
             ],
         ];
 

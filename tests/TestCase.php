@@ -3,18 +3,19 @@
 namespace Spatie\Activitylog\Test;
 
 use CreateActivityLogTable;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
-use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use Jenssegers\Mongodb\MongodbServiceProvider;
+use Jenssegers\Mongodb\Schema\Blueprint;
+use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Activitylog\ActivitylogServiceProvider;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Test\Models\Article;
 use Spatie\Activitylog\Test\Models\User;
 
-abstract class TestCase extends OrchestraTestCase
+abstract class TestCase extends Orchestra
 {
     public function setUp(): void
     {
@@ -23,6 +24,16 @@ abstract class TestCase extends OrchestraTestCase
         parent::setUp();
 
         $this->setUpDatabase();
+    }
+
+    /**
+     * Flush the database after each test function
+     */
+    public function tearDown(): void
+    {
+        Activity::truncate();
+        Article::truncate();
+        User::truncate();
     }
 
     protected function checkCustomRequirements()
@@ -37,17 +48,20 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app)
     {
         return [
+            MongodbServiceProvider::class,
             ActivitylogServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
-        $app['config']->set('activitylog.database_connection', 'sqlite');
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
+        $app['config']->set('database.default', 'mongodb');
+        $app['config']->set('database.connections.mongodb', [
+            'host' => 'localhost',
+            'port' => '27017',
+            'driver' => 'mongodb',
+            'database' => 'laravel_activitylog_mongodb_test',
+            'prefix' => '',
         ]);
 
         $app['config']->set('auth.providers.users.model', User::class);
@@ -58,37 +72,7 @@ abstract class TestCase extends OrchestraTestCase
 
     protected function setUpDatabase()
     {
-        $this->createActivityLogTable();
-
-        $this->createTables('articles', 'users');
         $this->seedModels(Article::class, User::class);
-    }
-
-    protected function createActivityLogTable()
-    {
-        include_once __DIR__.'/../migrations/create_activity_log_table.php.stub';
-
-        (new CreateActivityLogTable())->up();
-    }
-
-    protected function createTables(...$tableNames)
-    {
-        collect($tableNames)->each(function (string $tableName) {
-            Schema::create($tableName, function (Blueprint $table) use ($tableName) {
-                $table->increments('id');
-                $table->string('name')->nullable();
-                $table->string('text')->nullable();
-                $table->timestamps();
-                $table->softDeletes();
-
-                if ($tableName === 'articles') {
-                    $table->integer('user_id')->unsigned()->nullable();
-                    $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-                    $table->text('json')->nullable();
-                    $table->decimal('price')->nullable();
-                }
-            });
-        });
     }
 
     protected function seedModels(...$modelClasses)

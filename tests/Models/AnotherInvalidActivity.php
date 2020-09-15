@@ -2,11 +2,11 @@
 
 namespace Spatie\Activitylog\Test\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Jenssegers\Mongodb\Eloquent\Builder;
+use Jenssegers\Mongodb\Eloquent\Model;
+use Jenssegers\Mongodb\Relations\MorphTo;
 use Spatie\Activitylog\Contracts\Activity as ActivityContract;
 
 class AnotherInvalidActivity implements ActivityContract
@@ -73,10 +73,10 @@ class AnotherInvalidActivity implements ActivityContract
     /**
      * Scope a query to only include activities by a given causer.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param \Illuminate\Database\Eloquent\Model $causer
+     * @param  Builder  $query
+     * @param  Model  $causer
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeCausedBy(Builder $query, Model $causer): Builder
     {
@@ -88,10 +88,10 @@ class AnotherInvalidActivity implements ActivityContract
     /**
      * Scope a query to only include activities for a given subject.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param \Illuminate\Database\Eloquent\Model $subject
+     * @param  Builder  $query
+     * @param  Model  $subject
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeForSubject(Builder $query, Model $subject): Builder
     {

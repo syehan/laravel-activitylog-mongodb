@@ -186,14 +186,13 @@ class ActivityLoggerTest extends TestCase
      */
     public function it_will_use_the_logged_in_user_as_the_causer_by_default()
     {
-        $userId = 1;
-
-        Auth::login(User::find($userId));
+        $user = User::first();
+        Auth::login($user);
 
         activity()->log('hello poetsvrouwman');
 
         $this->assertInstanceOf(User::class, $this->getLastActivity()->causer);
-        $this->assertEquals($userId, $this->getLastActivity()->causer->id);
+        $this->assertEquals($user->_id, $this->getLastActivity()->causer->id);
     }
 
     /** @test */
@@ -210,9 +209,7 @@ class ActivityLoggerTest extends TestCase
     /** @test */
     public function it_will_override_the_logged_in_user_as_the_causer_when_an_anonymous_causer_is_specified()
     {
-        $userId = 1;
-
-        Auth::login(User::find($userId));
+        Auth::login(User::first());
 
         activity()
             ->byAnonymous()

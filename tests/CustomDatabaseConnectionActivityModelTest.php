@@ -20,10 +20,10 @@ class CustomDatabaseConnectionActivityModelTest extends TestCase
     {
         $model = new Activity();
 
-        $model->setConnection('custom_sqlite');
+        $model->setConnection('custom_mongodb');
 
         $this->assertNotEquals($model->getConnectionName(), config('activitylog.database_connection'));
-        $this->assertEquals($model->getConnectionName(), 'custom_sqlite');
+        $this->assertEquals($model->getConnectionName(), 'custom_mongodb');
     }
 
     /** @test */
@@ -33,7 +33,7 @@ class CustomDatabaseConnectionActivityModelTest extends TestCase
 
         $model = new Activity();
 
-        $this->assertInstanceOf('Illuminate\Database\SQLiteConnection', $model->getConnection());
+        $this->assertInstanceOf('Jenssegers\Mongodb\Connection', $model->getConnection());
     }
 
     /** @test */

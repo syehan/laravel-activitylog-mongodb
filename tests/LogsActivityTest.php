@@ -3,8 +3,8 @@
 namespace Spatie\Activitylog\Test;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
+use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Test\Models\Article;
 use Spatie\Activitylog\Test\Models\Issue733;
