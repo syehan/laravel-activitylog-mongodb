@@ -1,14 +1,18 @@
 {
-    "name": "spatie/laravel-activitylog",
+    "name": "mostafamaklad/laravel-activitylog-mongodb",
     "description": "A very simple activity logger to monitor the users of your website or application",
     "keywords": [
         "spatie",
         "log",
         "user",
         "activity",
-        "laravel"
+        "laravel",
+        "mongodb",
+        "laravel-mongodb",
+        "maklad",
+        "mostafamaklad"
     ],
-    "homepage": "https://github.com/spatie/activitylog",
+    "homepage": "https://github.com/mostafamaklad/laravel-activitylog-mongodb",
     "license": "MIT",
     "authors": [
         {
@@ -27,6 +31,12 @@
             "name": "Tom Witkowski",
             "email": "dev.gummibeer@gmail.com",
             "homepage": "https://gummibeer.de",
+            "role": "Developer"
+        },
+        {
+            "name": "mostafamaklad",
+            "email": "dev.mostafa.maklad@gmail.com",
+            "homepage": "https://maklad.dev",
             "role": "Developer"
         }
     ],
