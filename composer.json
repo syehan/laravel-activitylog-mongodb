@@ -1,6 +1,6 @@
 {
-    "name": "mostafamaklad/laravel-activitylog-mongodb",
-    "description": "A very simple activity logger to monitor the users of your website or application",
+    "name": "salvation/laravel-activitylog-mongodb",
+    "description": "A very simple activity logger to monitor the users of your website or application (mongodb)",
     "keywords": [
         "spatie",
         "log",
@@ -9,10 +9,9 @@
         "laravel",
         "mongodb",
         "laravel-mongodb",
-        "maklad",
-        "mostafamaklad"
+        "salvation"
     ],
-    "homepage": "https://github.com/mostafamaklad/laravel-activitylog-mongodb",
+    "homepage": "https://github.com/salvation/laravel-activitylog-mongodb",
     "license": "MIT",
     "authors": [
         {
@@ -34,9 +33,9 @@
             "role": "Developer"
         },
         {
-            "name": "mostafamaklad",
-            "email": "dev.mostafa.maklad@gmail.com",
-            "homepage": "https://maklad.dev",
+            "name": "salvation",
+            "email": "modernbabbage@gmail.com",
+            "homepage": "https://anomalyng.com",
             "role": "Developer"
         }
     ],
