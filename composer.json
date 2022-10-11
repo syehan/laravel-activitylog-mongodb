@@ -1,5 +1,5 @@
 {
-    "name": "salvation/laravel-activitylog-mongodb",
+    "name": "syehan/laravel-activitylog-mongodb",
     "description": "A very simple activity logger to monitor the users of your website or application (mongodb)",
     "keywords": [
         "spatie",
@@ -11,7 +11,7 @@
         "laravel-mongodb",
         "salvation"
     ],
-    "homepage": "https://github.com/salvation/laravel-activitylog-mongodb",
+    "homepage": "https://github.com/syehan/laravel-activitylog-mongodb",
     "license": "MIT",
     "authors": [
         {
@@ -36,6 +36,12 @@
             "name": "salvation",
             "email": "modernbabbage@gmail.com",
             "homepage": "https://anomalyng.com",
+            "role": "Developer"
+        },
+        {
+            "name": "syehan",
+            "email": "sehanlim@outlook.com",
+            "homepage": "https://github.com/syehan",
             "role": "Developer"
         }
     ],
