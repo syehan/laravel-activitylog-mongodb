@@ -187,7 +187,7 @@ class ActivityLogger
         }
 
         $guard = $this->auth->guard($this->authDriver);
-        $provider = method_exists($guard, 'getProvider') ? $guard->getProvider() : null;
+        $provider = method_exists($guard, 'getProvider') ? $guard->getProvider() : '';
         $model = method_exists($provider, 'retrieveById') ? $provider->retrieveById($modelOrId) : null;
 
         if ($model instanceof Model) {
